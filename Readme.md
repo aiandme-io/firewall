@@ -69,7 +69,19 @@ def my_callback(log: LogsSchema):
 
 # integration example
 fw = Firewall(model_provider=LLMModelProvider.AZURE_OPENAI)
-r = fw("...replace with users prompt...", my_callback)
+analysis = fw("...replace with users prompt...", my_callback)
+"""
+  analysis["id"]: String
+    A unique id to reference this assessment (later in the callback). In case with integration with the
+    AIandMe platform, use this id to access the full log entry.
+  analysis["status"]: Boolean
+    If `True`, user prompt is legit, else it must be filtered
+  analysis["fail_category"]: String
+    Elaborating the result (mainly in case of failure or error). In case of log.result is `pass`, log.fail_category is also `pass`. If log.result is `fail`, then, log.fail_category can be one of (`off_topic`|`violation`|`restriction`). In case log.result is `error` of log.fail_category indicates the error category.
+"""
+if not analysis["status"]:
+  # prompt is filtered -> act
+  # ...
 ```
 
 In order to deploy your own AIandMe Firwall some **mandatory** configurations must be done:
