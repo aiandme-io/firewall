@@ -216,3 +216,9 @@ An example for an AI Agent intented to faciliated medical appointment booking:
 - [X] Support of user defined judges (reflection prompts).
 - [ ] ContexLex: Adversarial few shots model.
 - [ ] Integrate with other LLM providers.
+
+## Community
+Join the AIandMe community:
+- [Discord](https://discord.gg/VbVHRuPXE2)
+- [Meetup Page](https://www.meetup.com/ai-and-beers/)
+- [LinkedIn](https://www.linkedin.com/company/aiandme)
