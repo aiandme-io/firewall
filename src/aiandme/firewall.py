@@ -135,6 +135,10 @@ class __Judge:
 
             # start parsing the stream (chunks)
             for chunk in resp:
+                # skip empty chunks (e.g. initial replies of filters applied by the model provider)
+                if len(chunk.choices) == 0:
+                    continue
+
                 # consume chunks with other (non response) info
                 if not chunk.choices[0].delta.content:
                     continue
