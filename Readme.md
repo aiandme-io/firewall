@@ -1,5 +1,7 @@
-# AIandMe FirewallOS
+# AIandMe Firewall and FirewallOS
 The AIandMe FirewallOS open-source library leverages the `LLM-as-a-judge` concept to implement a robust contextual firewall for LLM-based applications. It helps safeguard your AI systems from unintended prompts such as jailbreaking attempts, malicious inputs, and other security threats.
+
+The AIandMe Firewall is the wrapper library to interact with your AIandMe projects. Build a project within your AIandMe account and use the AIandMe Firewall to integrate directly.  Visit the AIandMe [documentation](https://doc.aiandme.io) for more details and examples for integrating the AIandMe Firewall.
 
 ## Disclaimer
 The AIandMe FirewallOS library relies on LLM technology and, as a result, **cannot guarantee 100% protection** due to the inherent stochastic and probabilistic nature of LLMs. Users are advised to consider this limitation and incorporate additional safeguards to address potential vulnerabilities in compliance with legal and security standards.
@@ -112,7 +114,7 @@ If `LLM_PROVIDER_MODEL` is ommited, by default `gpt-4o` is used.
 **2. agent.json:** Define your current AI assistant. This is a json file with instructions for the `LLM-as-a-judge` concept. See more details in the **Project Files** section.
 
 ### 2. Integration with AIandMe platform
-Sign up for the free tier of the AIandMe platform to start storing your logs and leveraging powerful DevOps features. Create your account [here](https://www.aiandme.io), set up your project, and get the integration details provided in this example. For detailed setup instructions and additional resources, check out the AIandMe [documentation](https://www.aiandme.io). In this case, you don't need to integrate with external LLM providers.
+Sign up for the free tier of the AIandMe platform to start storing your logs and leveraging powerful DevOps features. Create your account [here](https://www.aiandme.io), set up your project, and get the integration details provided in this example. For detailed setup instructions and additional resources, check out the AIandMe [documentation](https://doc.aiandme.io). In this case, you don't need to integrate with external LLM providers.
 
 ```python 
 from os import getenv

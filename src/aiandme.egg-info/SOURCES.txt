@@ -1,7 +1,9 @@
+LICENSE
 README.md
 pyproject.toml
 src/aiandme/__init__.py
 src/aiandme/firewall.py
+src/aiandme/firewallos.py
 src/aiandme.egg-info/PKG-INFO
 src/aiandme.egg-info/SOURCES.txt
 src/aiandme.egg-info/dependency_links.txt
