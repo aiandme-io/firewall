@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aiandme"
+version = "0.1.0"
+authors = [
+  { name="Kostas Siabanis", email="hello@aiandme.io" },
+  { name="Demetris Gerogiannis", email="hello@aiandme.io" },
+]
+description = "AIandMe open source contextual firewall and integrations."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "openai==1.55.3",
+    "pydantic==2.9.2",
+    "pydantic_core==2.23.4",
+    "requests==2.32.3",
+]
+
+[project.urls]
+Homepage = "https://github.com/aiandme-io/firewall"
+Issues = "https://github.com/aiandme-io/firewall/issues"

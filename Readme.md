@@ -1,19 +1,19 @@
-# AIandMe Firewall
-The AIandMe Firewall open-source library leverages the `LLM-as-a-judge` concept to implement a robust contextual firewall for LLM-based applications. It helps safeguard your AI systems from unintended prompts such as jailbreaking attempts, malicious inputs, and other security threats.
+# AIandMe FirewallOS
+The AIandMe FirewallOS open-source library leverages the `LLM-as-a-judge` concept to implement a robust contextual firewall for LLM-based applications. It helps safeguard your AI systems from unintended prompts such as jailbreaking attempts, malicious inputs, and other security threats.
 
 ## Disclaimer
-The AIandMe Firewall library relies on LLM technology and, as a result, **cannot guarantee 100% protection** due to the inherent stochastic and probabilistic nature of LLMs. Users are advised to consider this limitation and incorporate additional safeguards to address potential vulnerabilities in compliance with legal and security standards.
+The AIandMe FirewallOS library relies on LLM technology and, as a result, **cannot guarantee 100% protection** due to the inherent stochastic and probabilistic nature of LLMs. Users are advised to consider this limitation and incorporate additional safeguards to address potential vulnerabilities in compliance with legal and security standards.
 
 
 ## How it works
-The AIandMe Firewall acts as a middleware layer that contextually filters and validates user prompts. This ensures that the AI agent adheres to its intended business scope and operational boundaries. Via a reflection approach an LLM is acting as a judge (`LLM-as-a-judge` concept) and assesses if the analysing user prompts adheres with 3 basic conditions:
+The AIandMe FirewallOS acts as a middleware layer that contextually filters and validates user prompts. This ensures that the AI agent adheres to its intended business scope and operational boundaries. Via a reflection approach an LLM is acting as a judge (`LLM-as-a-judge` concept) and assesses if the analysing user prompts adheres with 3 basic conditions:
 - **Scope Validation**: Ensures user prompts align with the AI agent's defined business scope - `OFF_TOPIC`.
 - **Intent Filtering**: Allows only prompts that match a predefined list of allowed intents - `VIOLATION`.
 - **Restricted Action Blocking**: Blocks prompts that attempt to trigger restricted actions - `RESTRICTION`.
 
-Keep in mind that the AIandMe Firewall library **does not function as a proxy**. Instead, it analyzes user prompts and provides a flag indicating potential issues (`off_topic`, `violation`, `restriction`). It is the responsibility of the LLM application developer to determine how to handle flagged prompts based on their specific requirements and use case.
+Keep in mind that the AIandMe FirewallOS library **does not function as a proxy**. Instead, it analyzes user prompts and provides a flag indicating potential issues (`off_topic`, `violation`, `restriction`). It is the responsibility of the LLM application developer to determine how to handle flagged prompts based on their specific requirements and use case.
 
-To ensure low latency, the AIandMe Firewall library operates in two asynchronous steps, leveraging the streaming capabilities of LLM providers.
+To ensure low latency, the AIandMe FirewallOS library operates in two asynchronous steps, leveraging the streaming capabilities of LLM providers.
 
 - Initial Assessment: The library quickly delivers a decision regarding the three categories: `off_topic`, `violation`, or `restriction`.
 - Explanation: In the second step, it completes the LLM-as-a-judge assessment by providing a detailed explanation of the verdict.
@@ -29,17 +29,17 @@ pip install aiandme
 ```
 
 ## Dependencies
-The AIandMe Firewall lib relies on the `Pydantic` lib for data validation (schemas).
+The AIandMe FirewallOS lib relies on the `Pydantic` lib for data validation (schemas).
 
 ## Examples
 
-Find bellow some examples of how to use the AIandMe Firewall lib for Self-hosting (example 1), or rely on your free tier AIandMe account (example 2).
+Find bellow some examples of how to use the AIandMe FirewallOS lib for Self-hosting (example 1), or rely on your free tier AIandMe account (example 2).
 
 ### 1. User defined callbacks
-You can set up your own callback activity to handle the assesment of the AIandMe Firewall. Find below an example of an integration that analyses a user prompt and registers a callback functio to log the result.
+You can set up your own callback activity to handle the assesment of the AIandMe FirewallOS. Find below an example of an integration that analyses a user prompt and registers a callback functio to log the result.
 
 ```python 
-from aiandme import Firewall, LLMModelProvider
+from aiandme import FirewallOS, LLMModelProvider
 from aiandme.schemas import Logs as LogsSchema
 import logging
 
@@ -68,7 +68,7 @@ def my_callback(log: LogsSchema):
     logging.info(log.model_dump())
 
 # integration example
-fw = Firewall(model_provider=LLMModelProvider.AZURE_OPENAI)
+fw = FirewallOS(model_provider=LLMModelProvider.AZURE_OPENAI)
 analysis = fw("...replace with users prompt...", my_callback)
 """
   analysis["id"]: String
@@ -86,10 +86,10 @@ if not analysis["status"]:
 
 In order to deploy your own AIandMe Firwall some **mandatory** configurations must be done:
 
-**1. Environment Variables:** In this deployment option, you will be using your own LLM provider for the reflection mechanism. Currently, the AIandMe Firewall lib supports integration with OpenAI and Azure OpenAI. Integrations with other providers are comming soon. Therefore, for:
+**1. Environment Variables:** In this deployment option, you will be using your own LLM provider for the reflection mechanism. Currently, the AIandMe FirewallOS lib supports integration with OpenAI and Azure OpenAI. Integrations with other providers are comming soon. Therefore, for:
 - 1.1 Azure OpenAI selection [**DEFAULT**]:
 ```python
-    fw = Firewall(model_provider=LLMModelProvider.AZURE_OPENAI)
+    fw = FirewallOS(model_provider=LLMModelProvider.AZURE_OPENAI)
 ```
 you have to define the following environment variables:
 ```bash
@@ -100,7 +100,7 @@ LLM_PROVIDER_MODEL="...replace with the serverless model for your Azure OpenAI d
 ```
 - 1.2 OpenAI selection:
 ```python
-    fw = Firewall(model_provider=LLMModelProvider.OPENAI)
+    fw = FirewallOS(model_provider=LLMModelProvider.OPENAI)
 ```
 you have to define the following environment variables:
 ```bash
@@ -116,7 +116,7 @@ Sign up for the free tier of the AIandMe platform to start storing your logs and
 
 ```python 
 from os import getenv
-from aiandme import Firewall
+from aiandme import FirewallOS
 
 
 # replace with the value from your project's integration page
@@ -124,7 +124,7 @@ AIANDME_FIREWALL_ENDPOINT = getenv("AIANDME_FIREWALL_ENDPOINT")
 AIANDME_FIREWALL_APIKEY = getenv("AIANDME_FIREWALL_APIKEY")
 
 # init the firewall session
-frw = Firewall(endpoint=AIANDME_FIREWALL_ENDPOINT, api_key=AIANDME_FIREWALL_APIKEY)
+frw = FirewallOS(endpoint=AIANDME_FIREWALL_ENDPOINT, api_key=AIANDME_FIREWALL_APIKEY)
 
 # analyse your user's prompt
 analysis = frw.eval("...replace with users prompt...")
@@ -144,10 +144,10 @@ if not analysis["pass"]:
 ```
 
 ## LLM Reflection
-The AIandMe Firewall lib implements a reflection mechanism to assess the user prompt. Variable `LLM_AS_A_JUDGE_REFLECTION_PROMPT` in _firewall.py_ file holds this reflection prompt. You may alter the prompt to deliver your own reflection mechanism. **However**, you must consider the asynchronous operation of the AIandMe Firewall lib utilizing the streaming mechanism of the LLM providers. In that sense, you **MUST** respect the expected input and output format of the LLM assessment so as the lib functions properly and therefore, instruct the LLM in your own reflection prompt to deliver its response accordingly.
+The AIandMe FirewallOS lib implements a reflection mechanism to assess the user prompt. Variable `LLM_AS_A_JUDGE_REFLECTION_PROMPT` in _firewall.py_ file holds this reflection prompt. You may alter the prompt to deliver your own reflection mechanism. **However**, you must consider the asynchronous operation of the AIandMe FirewallOS lib utilizing the streaming mechanism of the LLM providers. In that sense, you **MUST** respect the expected input and output format of the LLM assessment so as the lib functions properly and therefore, instruct the LLM in your own reflection prompt to deliver its response accordingly.
 
 ## Project Files (Self-hosting)
-A typical project using the AIandMe Firewall lib has the following structure:
+A typical project using the AIandMe FirewallOS lib has the following structure:
 
 ```
 project
@@ -158,7 +158,7 @@ project
 
 where,
 - **main.py:** Is your actual script.
-- **agent.json:** Definition of the AI agent that is being protected with the AIandMe Firewall lib. More details bellow.
+- **agent.json:** Definition of the AI agent that is being protected with the AIandMe FirewallOS lib. More details bellow.
 - **.env:** Holds the project environment variables. Amongst others, it holds the appropriate env vars for LLM provider integration (as described in section **Examples** above).
 
 ### The _agent.json_ file

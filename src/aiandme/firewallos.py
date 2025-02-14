@@ -86,7 +86,7 @@ class LLMModelProvider(Enum):
 """
 
 
-class __Judge:
+class __JudgeOS:
     def __init__(self, model_provider: LLMModelProvider):
         if model_provider == LLMModelProvider.AZURE_OPENAI:
             from aiandme.model_providers import AzureOpenai_LLMStreamer as LLMStreamer
@@ -209,7 +209,7 @@ class __Judge:
                 yield (JudgmentState.ERROR, str(e))
 
 
-class Firewall(__Judge):
+class FirewallOS(__JudgeOS):
 
     def __init__(
         self,

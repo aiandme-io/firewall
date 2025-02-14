@@ -1,5 +1,5 @@
-from .firewall import (
-    Firewall,
+from .firewallos import (
+    FirewallOS,
     LLMModelProvider,
     JudgmentState,
     Verdict,
