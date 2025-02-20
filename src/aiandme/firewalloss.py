@@ -209,7 +209,7 @@ class __JudgeOS:
                 yield (JudgmentState.ERROR, str(e))
 
 
-class FirewallOS(__JudgeOS):
+class FirewallOSS(__JudgeOS):
 
     def __init__(
         self,
