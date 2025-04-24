@@ -1,4 +1,4 @@
-from .FirewallOSS import (
+from .firewalloss import (
     FirewallOSS,
     LLMModelProvider,
     JudgmentState,
